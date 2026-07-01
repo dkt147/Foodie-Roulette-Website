@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Noeffs LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon"
+        href="./images/logo.png"
+        alt="Foodie Roulette" />
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-hero {
+            padding: 120px 5% 60px;
+            background: var(--off);
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 900;
+            color: var(--n);
+        }
+
+        .contact-hero h1 em {
+            color: var(--g);
+            font-style: italic;
+        }
+
+        .contact-hero p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            padding: 80px 5%;
+            background: #fff;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--off);
+            padding: 40px 36px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-form h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--n);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--n);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.95rem;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--g);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--n);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            background: var(--g);
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .contact-info h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--n);
+        }
+
+        .info-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .info-item .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--off);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--g);
+            flex-shrink: 0;
+        }
+
+        .info-item h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--n);
+            margin-bottom: 4px;
+        }
+
+        .info-item p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .info-item a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-item a:hover {
+            color: var(--g);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── CTA ── */
+        #cta {
+            background: var(--n);
+            padding: 120px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .04);
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-ring1 {
+            width: 400px;
+            height: 400px
+        }
+
+        .cta-ring2 {
+            width: 650px;
+            height: 650px
+        }
+
+        .cta-ring3 {
+            width: 900px;
+            height: 900px
+        }
+
+        .cta-tag {
+            display: inline-block;
+            background: rgba(255, 138, 92, .15);
+            color: var(--g2);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 138, 92, .25);
+        }
+
+        .cta-h {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -.03em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .cta-h em {
+            font-style: italic;
+            color: var(--g2)
+        }
+
+        .cta-p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, .5);
+            max-width: 460px;
+            margin: 0 auto 48px;
+            line-height: 1.7
+        }
+
+        .store-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, .07);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 16px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, .1);
+            transition: all .22s;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, .13);
+            border-color: rgba(255, 255, 255, .2);
+            transform: translateY(-3px)
+        }
+
+        .store-ico {
+            font-size: 1.5rem
+        }
+
+        .store-label small {
+            display: block;
+            font-size: .65rem;
+            opacity: .5;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 2px
+        }
+
+        .store-label strong {
+            font-size: .95rem;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="./images/logo.png" alt="Foodie Roulette" />
+            <span class="nav-logo-text">Foodie <span>Roulette</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="download.html">Download</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" style="opacity:1">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="download.html" class="nav-dl">
+                <i class="fas fa-download"></i> Download App
+            </a>
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="closeMenu()">Home</a>
+        <a href="features.html" onclick="closeMenu()">Features</a>
+        <a href="download.html" onclick="closeMenu()">Download</a>
+        <a href="about.html" onclick="closeMenu()">About</a>
+        <a href="contact.html" onclick="closeMenu()">Contact</a>
+    </div>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="reveal">
+            <p class="s-tag">Contact Us</p>
+            <h1>Get in <em>Touch</em></h1>
+            <p>Have questions, feedback, or need help? We're here for you. Reach out anytime.</p>
+        </div>
+    </section>
+
+    <!-- Contact Grid -->
+    <section class="contact-grid">
+        <div class="contact-form reveal">
+            <h3>Send us a message</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject">
+                        <option value="">Select a topic</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="feedback">Feedback &amp; Suggestions</option>
+                        <option value="bug">Report a Bug</option>
+                        <option value="business">Business / Partnership</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="How can we help?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+        <div class="contact-info reveal">
+            <h3>Contact Information</h3>
+
+            <div class="info-item">
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:support@noeffs.com">support@noeffs.com</a></p>
+                    <p><a href="mailto:contact@noeffs.com">contact@noeffs.com</a></p>
+                    <p><a href="mailto:privacy@noeffs.com">privacy@noeffs.com</a></p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon"><i class="fas fa-phone"></i></div>
+                <div>
+                    <h4>Phone</h4>
+                    <p><a href="tel:8776633378">877-663-3378</a></p>
+                    <p style="font-size:0.8rem;color:var(--muted);">Mon–Fri, 9am–5pm EST</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon"><i class="fas fa-location-dot"></i></div>
+                <div>
+                    <h4>Address</h4>
+                    <p>Noeffs LLC</p>
+                    <p>Brunswick, MD, USA</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="icon"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h4>Response Time</h4>
+                    <p>We typically respond within 24 hours.</p>
+                    <p style="font-size:0.8rem;color:var(--muted);">For urgent issues, please call.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-ring cta-ring1"></div>
+        <div class="cta-ring cta-ring2"></div>
+        <div class="cta-ring cta-ring3"></div>
+        <p class="cta-tag reveal">Free Download — No Credit Card</p>
+        <h2 class="cta-h reveal">Stop Scrolling.<br /><em>Start Going.</em></h2>
+        <p class="cta-p reveal">Download Foodie Roulette free. Discover venues, decide in seconds, and keep the night
+            responsible — all in one app. Available now on Android and iOS.</p>
+        <div class="store-row reveal">
+            <a href="download.html" class="store-btn">
+                <span class="store-ico"><i class="fab fa-apple"></i></span>
+                <div class="store-label"><small>Download on the</small><strong>App Store</strong></div>
+            </a>
+            <a href="#" class="store-btn">
+                <span class="store-ico"><i class="fab fa-android"></i></span>
+                <div class="store-label"><small>Get it on</small><strong>Google Play</strong></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="ft-top">
+            <div class="ft-brand">
+                <div class="ft-logo">
+                    <img src="./images/logo.png" alt="Foodie Roulette">
+                    <span>Foodie <em>Roulette</em></span>
+                </div>
+                <p class="ft-tagline">Discover where to go, decide in seconds, and have a great (and responsible) night
+                    out. A product by Noeffs LLC.</p>
+            </div>
+            <div class="ft-col">
+                <h5>Product</h5>
+                <a href="features.html">Features</a>
+                <a href="download.html">Download</a>
+            </div>
+            <div class="ft-col">
+                <h5>Company</h5>
+                <a href="about.html">About Noeffs LLC</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <div class="ft-col">
+                <h5>Contact</h5>
+                <a href="mailto:support@noeffs.com">support@noeffs.com</a>
+                <a href="mailto:contact@noeffs.com">contact@noeffs.com</a>
+                <a href="tel:8776633378">877-663-3378</a>
+                <a href="#">Brunswick, MD, USA</a>
+            </div>
+        </div>
+        <div class="ft-bottom">
+            <p class="ft-copy">© 2026 Noeffs LLC · All rights reserved · Brunswick, MD</p>
+            <div class="ft-contact">
+                <a href="mailto:privacy@noeffs.com">privacy@noeffs.com</a>
+                <a href="download.html">App Store</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

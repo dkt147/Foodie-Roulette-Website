@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Noeffs LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .legal-hero {
+            padding: 120px 5% 60px;
+            background: var(--off);
+            text-align: center;
+        }
+
+        .legal-hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 900;
+            color: var(--n);
+        }
+
+        .legal-hero h1 em {
+            color: var(--g);
+            font-style: italic;
+        }
+
+        .legal-hero p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        .legal-hero .meta {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .legal-content {
+            padding: 60px 5%;
+            background: #fff;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .legal-content h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--n);
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+
+        .legal-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-content h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--n);
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+
+        .legal-content p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .legal-content ul {
+            list-style: none;
+            margin: 12px 0 20px 0;
+        }
+
+        .legal-content ul li {
+            padding: 6px 0 6px 28px;
+            color: var(--muted);
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .legal-content ul li::before {
+            content: '•';
+            color: var(--g);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+        }
+
+        .legal-content .highlight-box {
+            background: var(--off);
+            border-left: 4px solid var(--g);
+            padding: 24px 28px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .legal-content .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        .legal-content .section-number {
+            display: inline-block;
+            background: var(--g);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 2px 10px;
+            border-radius: 99px;
+            margin-right: 10px;
+        }
+
+        .legal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--g3);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 24px;
+            transition: gap 0.2s;
+        }
+
+        .legal-back:hover {
+            gap: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .legal-content {
+                padding: 40px 6%;
+            }
+        }
+
+        /* ── CTA ── */
+        #cta {
+            background: var(--n);
+            padding: 120px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .04);
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-ring1 {
+            width: 400px;
+            height: 400px
+        }
+
+        .cta-ring2 {
+            width: 650px;
+            height: 650px
+        }
+
+        .cta-ring3 {
+            width: 900px;
+            height: 900px
+        }
+
+        .cta-tag {
+            display: inline-block;
+            background: rgba(255, 138, 92, .15);
+            color: var(--g2);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 138, 92, .25);
+        }
+
+        .cta-h {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -.03em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .cta-h em {
+            font-style: italic;
+            color: var(--g2)
+        }
+
+        .cta-p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, .5);
+            max-width: 460px;
+            margin: 0 auto 48px;
+            line-height: 1.7
+        }
+
+        .store-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, .07);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 16px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, .1);
+            transition: all .22s;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, .13);
+            border-color: rgba(255, 255, 255, .2);
+            transform: translateY(-3px)
+        }
+
+        .store-ico {
+            font-size: 1.5rem
+        }
+
+        .store-label small {
+            display: block;
+            font-size: .65rem;
+            opacity: .5;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 2px
+        }
+
+        .store-label strong {
+            font-size: .95rem;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="./images/logo.png" alt="Foodie Roulette">
+            <span class="nav-logo-text">Foodie <span>Roulette</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="download.html">Download</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="download.html" class="nav-dl">
+                <i class="fas fa-download"></i> Download App
+            </a>
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="closeMenu()">Home</a>
+        <a href="features.html" onclick="closeMenu()">Features</a>
+        <a href="download.html" onclick="closeMenu()">Download</a>
+        <a href="about.html" onclick="closeMenu()">About</a>
+        <a href="contact.html" onclick="closeMenu()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="legal-hero">
+        <div class="reveal">
+            <p class="s-tag">Legal</p>
+            <h1>Terms of <em>Service</em></h1>
+            <p>Please read these Terms carefully before using any Noeffs LLC product or service.</p>
+            <p class="meta">Effective: May 8, 2026 · Last updated: May 8, 2026</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="legal-content">
+        <div class="reveal">
+            <p style="font-weight:600;color:var(--n);">Please read these Terms of Service carefully before using any
+                Noeffs LLC product or service. By accessing or using our products, you agree to be bound by these terms.
+            </p>
+
+            <h2><span class="section-number">1</span> Acceptance of Terms</h2>
+            <p>By downloading, installing, accessing, or using any application, website, or service offered by Noeffs
+                LLC (collectively, the "Services"), you agree to be legally bound by these Terms of Service ("Terms")
+                and our Privacy Policy, which is incorporated herein by reference. If you do not agree to these Terms,
+                you may not use our Services.</p>
+            <p>If you are using the Services on behalf of a business or organization, you represent that you have the
+                authority to bind that entity to these Terms, and references to "you" include that entity.</p>
+
+            <h2><span class="section-number">2</span> About Noeffs LLC</h2>
+            <p>Noeffs LLC is a US-based technology company that designs and develops software applications and digital
+                products aimed at reducing everyday personal and business inconveniences. Our Services may include
+                mobile apps, web applications, tools, and related features made available to users from time to time.
+            </p>
+
+            <h2><span class="section-number">3</span> Eligibility</h2>
+            <p>You must be at least 13 years of age (or the applicable age of digital consent in your jurisdiction) to
+                use our Services. By using the Services, you represent and warrant that you meet this age requirement.
+                If you are under 18, you represent that a parent or legal guardian has reviewed and agreed to these
+                Terms on your behalf.</p>
+            <p>Our Services are available to users worldwide, subject to applicable laws. You are responsible for
+                ensuring that your use of the Services complies with the laws of your jurisdiction.</p>
+
+            <h2><span class="section-number">4</span> Your Account</h2>
+            <p>Some of our Services require you to create an account. You agree to:</p>
+            <ul>
+                <li>Provide accurate, current, and complete information during registration</li>
+                <li>Keep your account credentials confidential and not share them with others</li>
+                <li>Notify us immediately at the contact information below if you suspect unauthorized access to your
+                    account</li>
+                <li>Be responsible for all activity that occurs under your account</li>
+            </ul>
+            <p>Noeffs LLC reserves the right to suspend or terminate accounts that violate these Terms or are involved
+                in fraudulent, abusive, or illegal activity.</p>
+
+            <h2><span class="section-number">5</span> Permitted Use and Restrictions</h2>
+            <p>You may use our Services only for lawful purposes and in accordance with these Terms. You agree not to:
+            </p>
+            <ul>
+                <li>Use the Services in any way that violates applicable local, state, national, or international laws
+                    or regulations</li>
+                <li>Attempt to gain unauthorized access to any part of the Services or related systems</li>
+                <li>Reverse engineer, decompile, disassemble, or attempt to derive the source code of any part of the
+                    Services</li>
+                <li>Use automated tools (bots, scrapers, crawlers) to access or interact with the Services without our
+                    written permission</li>
+                <li>Upload or transmit viruses, malware, or any other harmful or disruptive code</li>
+                <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity</li>
+                <li>Use the Services to harass, harm, threaten, or defraud any person</li>
+                <li>Resell, sublicense, or commercially exploit the Services without our express written consent</li>
+            </ul>
+
+            <h2><span class="section-number">6</span> Your Content</h2>
+            <p>Our Services may allow you to create, upload, store, or share content such as notes, documents, images,
+                or other data ("User Content"). You retain ownership of all User Content you submit.</p>
+            <p>By submitting User Content, you grant Noeffs LLC a limited, non-exclusive, royalty-free license to store,
+                process, and display your content solely as necessary to provide and improve the Services to you. We do
+                not claim ownership of your content and do not use it for advertising purposes.</p>
+            <p>You are solely responsible for your User Content. You represent and warrant that you have all rights
+                necessary to submit the content and that it does not violate any third-party rights or applicable laws.
+            </p>
+
+            <h2><span class="section-number">7</span> Intellectual Property</h2>
+            <p>All rights, title, and interest in and to the Services — including software, design, logos, trademarks,
+                text, graphics, and other materials — are owned by Noeffs LLC or its licensors and are protected by
+                applicable intellectual property laws.</p>
+            <p>Nothing in these Terms grants you any right to use our trademarks, logos, or brand assets without our
+                prior written consent. Feedback or suggestions you provide about our Services may be used by us without
+                any obligation to you.</p>
+
+            <h2><span class="section-number">8</span> Subscriptions and Payments</h2>
+            <p>Certain features of our Services may require a paid subscription or one-time purchase. By initiating a
+                purchase, you agree to pay the applicable fees as described at the time of purchase.</p>
+            <ul>
+                <li><strong>Billing:</strong> Subscription fees are billed on a recurring basis (monthly or annually)
+                    until cancelled. You authorize us (or our payment processor) to charge your payment method on each
+                    billing date.</li>
+                <li><strong>Cancellation:</strong> You may cancel your subscription at any time. Cancellation takes
+                    effect at the end of the current billing period; no partial refunds are issued for unused time
+                    unless required by law.</li>
+                <li><strong>Price changes:</strong> We reserve the right to change pricing with reasonable advance
+                    notice. Continued use after a price change constitutes acceptance of the new price.</li>
+                <li><strong>Taxes:</strong> You are responsible for any applicable taxes associated with your purchase.
+                </li>
+            </ul>
+
+            <h2><span class="section-number">9</span> Disclaimer of Warranties</h2>
+            <p>The Services are provided "as is" and "as available" without warranties of any kind, either express or
+                implied, including but not limited to warranties of merchantability, fitness for a particular purpose,
+                or non-infringement. Noeffs LLC does not warrant that the Services will be uninterrupted, error-free, or
+                free of harmful components.</p>
+            <p>We do not warrant the accuracy, completeness, or usefulness of any information provided through the
+                Services. Your use of the Services is at your own risk.</p>
+
+            <h2><span class="section-number">10</span> Limitation of Liability</h2>
+            <p>To the fullest extent permitted by applicable law, Noeffs LLC and its officers, directors, employees, and
+                agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages —
+                including loss of data, profits, or goodwill — arising out of or in connection with your use of or
+                inability to use the Services, even if advised of the possibility of such damages.</p>
+            <p>Our total liability to you for any claims arising under these Terms shall not exceed the greater of (a)
+                the amount you paid to Noeffs LLC in the twelve months preceding the claim, or (b) one hundred US
+                dollars ($100.00).</p>
+
+            <h2><span class="section-number">11</span> Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless Noeffs LLC and its affiliates, officers, directors,
+                employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including
+                reasonable attorneys' fees) arising out of or in any way connected with your access to or use of the
+                Services, your User Content, or your violation of these Terms.</p>
+
+            <h2><span class="section-number">12</span> Termination</h2>
+            <p>We reserve the right to suspend or terminate your access to the Services at any time, with or without
+                notice, for any reason including violation of these Terms. You may also terminate your account at any
+                time by contacting us or using the account deletion feature within the applicable product.</p>
+            <p>Upon termination, your right to use the Services will immediately cease. Provisions that by their nature
+                should survive termination — including intellectual property, disclaimers, limitations of liability, and
+                indemnification — will survive.</p>
+
+            <h2><span class="section-number">13</span> Governing Law and Disputes</h2>
+            <p>These Terms are governed by the laws of the United States and the state in which Noeffs LLC is
+                registered, without regard to conflict of law principles. Any disputes arising out of or relating to
+                these Terms or the Services shall first be attempted to be resolved through good-faith negotiation.</p>
+            <p>If a dispute cannot be resolved informally, it shall be submitted to binding arbitration under the rules
+                of the American Arbitration Association, unless you opt out of arbitration by notifying us in writing
+                within 30 days of first agreeing to these Terms. Nothing in this section prevents either party from
+                seeking injunctive or other equitable relief.</p>
+
+            <h2><span class="section-number">14</span> Changes to These Terms</h2>
+            <p>We may update these Terms from time to time. When we make material changes, we will notify you via email
+                or an in-app notice and update the "Last updated" date above. Your continued use of the Services after
+                the effective date of the updated Terms constitutes your acceptance. If you do not agree to the revised
+                Terms, you must stop using the Services.</p>
+
+            <h2><span class="section-number">15</span> Contact Us</h2>
+            <p>If you have questions or concerns about these Terms, please contact us:</p>
+            <ul>
+                <li><strong>Company:</strong> Noeffs LLC</li>
+                <li><strong>Email:</strong> <a href="mailto:contact@noeffs.com"
+                        style="color:var(--g);text-decoration:none;font-weight:600;">contact@noeffs.com</a></li>
+                <li><strong>Address:</strong> United States</li>
+            </ul>
+        </div>
+    </section>
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-ring cta-ring1"></div>
+        <div class="cta-ring cta-ring2"></div>
+        <div class="cta-ring cta-ring3"></div>
+        <p class="cta-tag reveal">Free Download — No Credit Card</p>
+        <h2 class="cta-h reveal">Stop Scrolling.<br /><em>Start Going.</em></h2>
+        <p class="cta-p reveal">Download Foodie Roulette free. Discover venues, decide in seconds, and keep the night
+            responsible — all in one app. Available now on Android and iOS.</p>
+        <div class="store-row reveal">
+            <a href="download.html" class="store-btn">
+                <span class="store-ico"><i class="fab fa-apple"></i></span>
+                <div class="store-label"><small>Download on the</small><strong>App Store</strong></div>
+            </a>
+            <a href="#" class="store-btn">
+                <span class="store-ico"><i class="fab fa-android"></i></span>
+                <div class="store-label"><small>Get it on</small><strong>Google Play</strong></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="ft-top">
+            <div class="ft-brand">
+                <div class="ft-logo">
+                    <img src="./images/logo.png" alt="Foodie Roulette">
+                    <span>Foodie <em>Roulette</em></span>
+                </div>
+                <p class="ft-tagline">Discover where to go, decide in seconds, and have a great (and responsible) night
+                    out. A product by Noeffs LLC.</p>
+            </div>
+            <div class="ft-col">
+                <h5>Product</h5>
+                <a href="features.html">Features</a>
+                <a href="download.html">Download</a>
+            </div>
+            <div class="ft-col">
+                <h5>Company</h5>
+                <a href="about.html">About Noeffs LLC</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <div class="ft-col">
+                <h5>Contact</h5>
+                <a href="mailto:support@noeffs.com">support@noeffs.com</a>
+                <a href="mailto:contact@noeffs.com">contact@noeffs.com</a>
+                <a href="tel:8776633378">877-663-3378</a>
+                <a href="#">Brunswick, MD, USA</a>
+            </div>
+        </div>
+        <div class="ft-bottom">
+            <p class="ft-copy">© 2026 Noeffs LLC · All rights reserved · Brunswick, MD</p>
+            <div class="ft-contact">
+                <a href="mailto:privacy@noeffs.com">privacy@noeffs.com</a>
+                <a href="download.html">App Store</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

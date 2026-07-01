@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features — Foodie Roulette</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon"
+        href="./images/logo.png"
+        alt="Foodie Roulette" />"
+    <style>
+        /* Page-specific styles for features.html */
+        .features-hero {
+            padding: 120px 5% 60px;
+            background: var(--off);
+            text-align: center;
+        }
+
+        .features-hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 900;
+            color: var(--n);
+            line-height: 1.1;
+        }
+
+        .features-hero h1 em {
+            color: var(--g);
+            font-style: italic;
+        }
+
+        .features-hero p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        .feature-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            padding: 80px 5%;
+            background: #fff;
+        }
+
+        .feature-detail-card {
+            background: var(--off);
+            border-radius: 20px;
+            padding: 40px 36px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-detail-card:hover {
+            border-color: var(--g);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-detail-card .icon {
+            font-size: 2rem;
+            color: var(--g);
+            margin-bottom: 16px;
+        }
+
+        .feature-detail-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--n);
+            margin-bottom: 10px;
+        }
+
+        .feature-detail-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .feature-detail-card ul {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .feature-detail-card ul li {
+            padding: 6px 0;
+            font-size: 0.85rem;
+            color: var(--muted);
+            display: flex;
+            gap: 10px;
+        }
+
+        .feature-detail-card ul li::before {
+            content: '✓';
+            color: var(--g);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .feature-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── CTA ── */
+        #cta {
+            background: var(--n);
+            padding: 120px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .04);
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-ring1 {
+            width: 400px;
+            height: 400px
+        }
+
+        .cta-ring2 {
+            width: 650px;
+            height: 650px
+        }
+
+        .cta-ring3 {
+            width: 900px;
+            height: 900px
+        }
+
+        .cta-tag {
+            display: inline-block;
+            background: rgba(255, 138, 92, .15);
+            color: var(--g2);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 138, 92, .25);
+        }
+
+        .cta-h {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -.03em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .cta-h em {
+            font-style: italic;
+            color: var(--g2)
+        }
+
+        .cta-p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, .5);
+            max-width: 460px;
+            margin: 0 auto 48px;
+            line-height: 1.7
+        }
+
+        .store-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, .07);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 16px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, .1);
+            transition: all .22s;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, .13);
+            border-color: rgba(255, 255, 255, .2);
+            transform: translateY(-3px)
+        }
+
+        .store-ico {
+            font-size: 1.5rem
+        }
+
+        .store-label small {
+            display: block;
+            font-size: .65rem;
+            opacity: .5;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 2px
+        }
+
+        .store-label strong {
+            font-size: .95rem;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV (same as index) -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="./images/logo.png" alt="Foodie Roulette">
+            <span class="nav-logo-text">Foodie <span>Roulette</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="features.html" style="opacity:1">Features</a></li>
+            <li><a href="download.html">Download</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="download.html" class="nav-dl">
+                <i class="fas fa-download"></i> Download App
+            </a>
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="closeMenu()">Home</a>
+        <a href="features.html" onclick="closeMenu()">Features</a>
+        <a href="download.html" onclick="closeMenu()">Download</a>
+        <a href="about.html" onclick="closeMenu()">About</a>
+        <a href="contact.html" onclick="closeMenu()">Contact</a>
+    </div>
+
+    <!-- Features Hero -->
+    <section class="features-hero">
+        <div class="reveal">
+            <p class="s-tag">All Features</p>
+            <h1>Everything You Need<br><em>for a Great Night</em></h1>
+            <p>Foodie Roulette isn't just a discovery app — it's a complete toolkit for finding the spot, deciding fast,
+                and having a great (and responsible) time.</p>
+        </div>
+    </section>
+
+    <!-- Feature Details -->
+    <section class="feature-detail-grid">
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-compass"></i></div>
+            <h3>Discover Nearby Venues</h3>
+            <p>Restaurants, bars, and street food vendors — all surfaced in one unified live map at any destination. No
+                destination is off-limits.</p>
+            <ul>
+                <li>Restaurants, bars &amp; street vendors</li>
+                <li>Live filters: cuisine, price, open now</li>
+                <li>Works in any city</li>
+            </ul>
+        </div>
+
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-shuffle"></i></div>
+            <h3>Quick Pick &amp; Spin the Wheel</h3>
+            <p>Can't decide? Set your radius, cuisine, and budget, then spin the wheel — Foodie Roulette picks the venue
+                for you, directly eliminating the group debate.</p>
+            <ul>
+                <li>Customizable radius &amp; filters</li>
+                <li>Instant decision in seconds</li>
+                <li>No more "I don't know, you pick"</li>
+            </ul>
+        </div>
+
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-dice"></i></div>
+            <h3>Bar Roulette</h3>
+            <p>Create a crawl, invite your friends, and let the app choose the next stop. Built-in challenges keep the
+                night moving and everyone involved.</p>
+            <ul>
+                <li>Group crawls with joined players</li>
+                <li>Built-in challenges</li>
+                <li>Works for any size group</li>
+            </ul>
+        </div>
+
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-car"></i></div>
+            <h3>Drink Tracker &amp; DD Mode</h3>
+            <p>Track drinks per person through the night and designate a driver in one tap — drivers always know who's
+                safe to drive, with a clean summary the next morning.</p>
+            <ul>
+                <li>Per-person drink tracking</li>
+                <li>One-tap designated driver</li>
+                <li>Night summary recap</li>
+            </ul>
+        </div>
+
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-star"></i></div>
+            <h3>Ratings &amp; Community Reviews</h3>
+            <p>Rate what stood out, write a quick review, and read community-verified reviews from real check-ins — know
+                what's actually good before you even leave.</p>
+            <ul>
+                <li>Check-in verified reviews</li>
+                <li>Quick star + comment flow</li>
+                <li>Share your finds with friends</li>
+            </ul>
+        </div>
+
+        <div class="feature-detail-card reveal">
+            <div class="icon"><i class="fas fa-heart"></i></div>
+            <h3>Food Personality Quiz</h3>
+            <p>Foodie Roulette learns your taste from a short onboarding quiz — cuisine, comfort vs. adventurous, budget
+                — so every recommendation actually fits you.</p>
+            <ul>
+                <li>One-minute onboarding quiz</li>
+                <li>Personalized recommendations</li>
+                <li>Gets smarter with every visit</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-ring cta-ring1"></div>
+        <div class="cta-ring cta-ring2"></div>
+        <div class="cta-ring cta-ring3"></div>
+        <p class="cta-tag reveal">Free Download — No Credit Card</p>
+        <h2 class="cta-h reveal">Stop Scrolling.<br /><em>Start Going.</em></h2>
+        <p class="cta-p reveal">Download Foodie Roulette free. Discover venues, decide in seconds, and keep the night
+            responsible — all in one app. Available now on Android and iOS.</p>
+        <div class="store-row reveal">
+            <a href="download.html" class="store-btn">
+                <span class="store-ico"><i class="fab fa-apple"></i></span>
+                <div class="store-label"><small>Download on the</small><strong>App Store</strong></div>
+            </a>
+            <a href="#" class="store-btn">
+                <span class="store-ico"><i class="fab fa-android"></i></span>
+                <div class="store-label"><small>Get it on</small><strong>Google Play</strong></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER (same as index) -->
+    <footer>
+        <div class="ft-top">
+            <div class="ft-brand">
+                <div class="ft-logo">
+                    <img src="./images/logo.png" alt="Foodie Roulette">
+                    <span>Foodie <em>Roulette</em></span>
+                </div>
+                <p class="ft-tagline">Discover where to go, decide in seconds, and have a great (and responsible) night
+                    out. A product by Noeffs LLC.</p>
+            </div>
+            <div class="ft-col">
+                <h5>Product</h5>
+                <a href="features.html">Features</a>
+                <a href="download.html">Download</a>
+            </div>
+            <div class="ft-col">
+                <h5>Company</h5>
+                <a href="about.html">About Noeffs LLC</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <div class="ft-col">
+                <h5>Contact</h5>
+                <a href="mailto:support@noeffs.com">support@noeffs.com</a>
+                <a href="mailto:contact@noeffs.com">contact@noeffs.com</a>
+                <a href="tel:8776633378">877-663-3378</a>
+                <a href="#">Brunswick, MD, USA</a>
+            </div>
+        </div>
+        <div class="ft-bottom">
+            <p class="ft-copy">© 2026 Noeffs LLC · All rights reserved · Brunswick, MD</p>
+            <div class="ft-contact">
+                <a href="mailto:privacy@noeffs.com">privacy@noeffs.com</a>
+                <a href="download.html">App Store</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

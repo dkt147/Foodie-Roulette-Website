@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foodie Roulette — Discover Where To Go Tonight.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" href="./images/logo.png" alt="Foodie Roulette" />
+
+  <style>
+    /* SAME CSS AS YOUR ORIGINAL CODE - COPY YOUR EXISTING STYLES HERE */
+    /* (I'm keeping your original CSS exactly as is, just updating the HTML content below) */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #fdf5ef;
+      color: #1b140f;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased
+    }
+
+    :root {
+      --g: #ff5a36;
+      --g2: #ff8a5c;
+      --g3: #c0391b;
+      --n: #221610;
+      --n2: #2f1f17;
+      --off: #fdf5ef;
+      --white: #ffffff;
+      --muted: #7d6f68;
+      --border: #ece1d8;
+      --card: #ffffff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f3ece5
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--g);
+      border-radius: 99px
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(253, 245, 239, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+
+    .nav.stuck {
+      border-color: var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .06)
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none
+    }
+
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(255, 90, 54, .3)
+    }
+
+    .nav-logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--n);
+      letter-spacing: -.02em
+    }
+
+    .nav-logo-text span {
+      color: var(--g)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--n);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      opacity: .6;
+      transition: opacity .2s
+    }
+
+    .nav-links a:hover {
+      opacity: 1
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .nav-dl {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--n);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: background .2s, transform .15s;
+    }
+
+    .nav-dl:hover {
+      background: var(--g);
+      transform: translateY(-1px)
+    }
+
+    .nav-dl svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none
+    }
+
+    .burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--n);
+      border-radius: 2px;
+      transition: .3s
+    }
+
+    .burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg)
+    }
+
+    .burger.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg)
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 68px 0 0;
+      background: var(--white);
+      z-index: 199;
+      flex-direction: column;
+      padding: 32px 6%;
+      gap: 28px;
+    }
+
+    .mobile-menu.open {
+      display: flex
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--n);
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      padding: 110px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(255, 90, 54, .07) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(34, 22, 16, .05) 0%, transparent 60%);
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--g3);
+      opacity: 0;
+      animation: up .7s .1s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--g);
+      border-radius: 2px;
+    }
+
+    .hero-h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--n);
+      letter-spacing: -.03em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: up .7s .2s ease forwards;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--g)
+    }
+
+    .hero-h1 .line2 {
+      display: block;
+      color: var(--g)
+    }
+
+    .hero-p {
+      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 38px;
+      font-weight: 400;
+      opacity: 0;
+      animation: up .7s .3s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: up .7s .4s ease forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .01em;
+      transition: all .22s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-dark {
+      background: var(--n);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(34, 22, 16, .25)
+    }
+
+    .btn-dark:hover {
+      background: var(--n2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(34, 22, 16, .3)
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--n);
+      border: 2px solid var(--n)
+    }
+
+    .btn-outline:hover {
+      background: var(--n);
+      color: #fff;
+      transform: translateY(-2px)
+    }
+
+    .btn-green {
+      background: var(--g);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(255, 90, 54, .3)
+    }
+
+    .btn-green:hover {
+      background: var(--g3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 90, 54, .4)
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+      opacity: 0;
+      animation: up .7s .5s ease forwards;
+    }
+
+    .hero-trust-dots {
+      display: flex;
+      gap: -4px
+    }
+
+    .hero-trust-dots span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: var(--g);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 800;
+      color: #fff;
+      margin-left: -8px;
+    }
+
+    .hero-trust-dots span:first-child {
+      margin-left: 0
+    }
+
+    .hero-trust p {
+      font-size: .78rem;
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    .hero-trust strong {
+      color: var(--n);
+      font-weight: 700
+    }
+
+    .hero-right {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: up .9s .3s ease forwards;
+    }
+
+    .phone-scene {
+      position: relative;
+      width: 300px
+    }
+
+    .phone-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at center, rgba(255, 90, 54, .2) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .6
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 1
+      }
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 260px;
+      margin: 0 auto;
+      animation: drift 7s ease-in-out infinite;
+    }
+
+    @keyframes drift {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-1.5deg)
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(1.5deg)
+      }
+    }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 36px;
+      box-shadow:
+        0 40px 80px rgba(34, 22, 16, .22),
+        0 16px 40px rgba(0, 0, 0, .1),
+        inset 0 0 0 1px rgba(255, 255, 255, .15);
+      display: block;
+    }
+
+    .bubble {
+      position: absolute;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .1);
+      padding: 10px 16px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bubble .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--g);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem
+    }
+
+    .bubble .b-label {
+      font-size: .68rem;
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    .bubble .b-val {
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--n)
+    }
+
+    .b1 {
+      top: 8%;
+      left: -38%;
+      animation: bdrift 5s ease-in-out infinite
+    }
+
+    .b2 {
+      bottom: 18%;
+      right: -32%;
+      animation: bdrift 6s 1s ease-in-out infinite reverse
+    }
+
+    @keyframes bdrift {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .marquee-wrap {
+      overflow: hidden;
+      padding: 20px 0;
+      background: var(--n);
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, .5);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .marquee-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--g);
+      opacity: .7;
+      flex-shrink: 0
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    section {
+      padding: 100px 5%
+    }
+
+    .s-tag {
+      display: inline-block;
+      background: rgba(255, 90, 54, .1);
+      color: var(--g3);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 90, 54, .2);
+    }
+
+    .s-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.9rem, 3.2vw, 3rem);
+      font-weight: 900;
+      color: var(--n);
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin-bottom: 18px;
+    }
+
+    .s-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 540px
+    }
+
+    .center {
+      text-align: center
+    }
+
+    .center .s-sub {
+      margin: 0 auto
+    }
+
+    #features {
+      background: #fff
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 64px;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, .05);
+    }
+
+    .feat-item {
+      padding: 44px 40px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+    }
+
+    .feat-item:nth-child(even) {
+      border-right: none
+    }
+
+    .feat-item:nth-child(5),
+    .feat-item:nth-child(6) {
+      border-bottom: none
+    }
+
+    .feat-item:hover {
+      background: rgba(255, 90, 54, .03)
+    }
+
+    .feat-num {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-family: 'Fraunces', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .feat-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--g), var(--g2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px rgba(255, 90, 54, .3);
+    }
+
+    .feat-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--n);
+      margin-bottom: 10px
+    }
+
+    .feat-desc {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    .nums-section {
+      background: var(--n);
+      padding: 80px 5%;
+    }
+
+    .nums-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .num-block {
+      padding: 48px 32px;
+      background: var(--n);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .num-block:last-child {
+      border-right: none
+    }
+
+    .num-val {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+      font-weight: 900;
+      color: var(--g2);
+      letter-spacing: -.02em;
+    }
+
+    .num-label {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .45);
+      font-weight: 500;
+      line-height: 1.5
+    }
+
+    #how {
+      background: var(--off)
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    }
+
+    .step {
+      text-align: center;
+      position: relative
+    }
+
+    .step-num {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--n);
+      position: relative;
+      z-index: 2;
+      transition: all .3s;
+    }
+
+    .step:hover .step-num {
+      background: var(--g);
+      border-color: var(--g);
+      color: #fff;
+      transform: scale(1.1)
+    }
+
+    .step-title {
+      font-size: .95rem;
+      font-weight: 800;
+      color: var(--n);
+      margin-bottom: 10px
+    }
+
+    .step-desc {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    #compare {
+      background: #fff
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, .07);
+      margin-top: 56px
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    thead tr {
+      background: var(--n)
+    }
+
+    th {
+      padding: 20px 22px;
+      font-size: .78rem;
+      font-weight: 700;
+      text-align: center;
+      color: rgba(255, 255, 255, .6);
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    th:first-child {
+      text-align: left
+    }
+
+    th.hl {
+      background: var(--g);
+      color: #fff
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .2s
+    }
+
+    tbody tr:last-child {
+      border: none
+    }
+
+    tbody tr:hover {
+      background: #fdf9f6
+    }
+
+    td {
+      padding: 16px 22px;
+      font-size: .86rem;
+      text-align: center;
+      color: var(--muted)
+    }
+
+    td:first-child {
+      text-align: left;
+      font-weight: 700;
+      color: var(--n)
+    }
+
+    td.hl-cell {
+      background: rgba(255, 90, 54, .05)
+    }
+
+    .ck {
+      color: var(--g);
+      font-weight: 800;
+      font-size: .9rem
+    }
+
+    .no {
+      color: #ddd0c5;
+      font-size: .9rem
+    }
+
+    .pt {
+      color: #e8a020;
+      font-size: .75rem;
+      font-weight: 700
+    }
+
+    #about {
+      background: var(--off)
+    }
+
+    .about-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start
+    }
+
+    .values-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .value-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .value-row:first-child {
+      border-top: 1px solid var(--border)
+    }
+
+    .v-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 90, 54, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    .v-title {
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--n);
+      margin-bottom: 4px
+    }
+
+    .v-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .about-card-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .a-card {
+      background: var(--n);
+      border-radius: 20px;
+      padding: 36px 32px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .a-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .a-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px
+    }
+
+    .a-card-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-bottom: 10px
+    }
+
+    .a-card-desc {
+      font-size: .85rem;
+      line-height: 1.65;
+      opacity: .7
+    }
+
+    .a-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--g);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 700;
+      margin-top: 14px;
+    }
+
+    .a-badge.dim {
+      background: rgba(255, 255, 255, .1)
+    }
+
+    .a-card2 {
+      background: linear-gradient(135deg, var(--g3), var(--g));
+      border-radius: 20px;
+      padding: 36px 32px;
+      color: #fff;
+    }
+
+    .a-card2-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin-bottom: 10px
+    }
+
+    .a-card2-desc {
+      font-size: .85rem;
+      line-height: 1.65;
+      opacity: .85
+    }
+
+    #legal {
+      background: #fff
+    }
+
+    .legal-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px
+    }
+
+    .leg-card {
+      background: var(--off);
+      border-radius: 20px;
+      padding: 40px 36px;
+      border: 1px solid var(--border);
+      transition: border-color .25s, box-shadow .25s;
+    }
+
+    .leg-card:hover {
+      border-color: rgba(255, 90, 54, .3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .06)
+    }
+
+    .leg-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px
+    }
+
+    .leg-ico {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--n);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem
+    }
+
+    .leg-head {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--n)
+    }
+
+    .leg-sub {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 20px
+    }
+
+    .leg-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px
+    }
+
+    .leg-points li {
+      display: flex;
+      gap: 10px;
+      font-size: .83rem;
+      color: var(--muted)
+    }
+
+    .leg-points li::before {
+      content: '→';
+      color: var(--g);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-right: 8px
+    }
+
+    .leg-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--g3);
+      font-size: .82rem;
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 2px solid var(--g);
+      padding-bottom: 2px;
+      transition: gap .2s;
+    }
+
+    .leg-btn:hover {
+      gap: 12px
+    }
+
+    #cta {
+      background: var(--n);
+      padding: 120px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .04);
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-ring1 {
+      width: 400px;
+      height: 400px
+    }
+
+    .cta-ring2 {
+      width: 650px;
+      height: 650px
+    }
+
+    .cta-ring3 {
+      width: 900px;
+      height: 900px
+    }
+
+    .cta-tag {
+      display: inline-block;
+      background: rgba(255, 138, 92, .15);
+      color: var(--g2);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 138, 92, .25);
+    }
+
+    .cta-h {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .cta-h em {
+      font-style: italic;
+      color: var(--g2)
+    }
+
+    .cta-p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .5);
+      max-width: 460px;
+      margin: 0 auto 48px;
+      line-height: 1.7
+    }
+
+    .store-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, .07);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 16px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      transition: all .22s;
+    }
+
+    .store-btn:hover {
+      background: rgba(255, 255, 255, .13);
+      border-color: rgba(255, 255, 255, .2);
+      transform: translateY(-3px)
+    }
+
+    .store-ico {
+      font-size: 1.5rem
+    }
+
+    .store-label small {
+      display: block;
+      font-size: .65rem;
+      opacity: .5;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 2px
+    }
+
+    .store-label strong {
+      font-size: .95rem;
+      font-weight: 700
+    }
+
+    footer {
+      background: #150d09;
+      color: #fff;
+      padding: 64px 5% 36px;
+    }
+
+    .ft-top {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px
+    }
+
+    .ft-brand {}
+
+    .ft-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px
+    }
+
+    .ft-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px
+    }
+
+    .ft-logo span {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .ft-logo span em {
+      color: var(--g2);
+      font-style: normal
+    }
+
+    .ft-tagline {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .35);
+      line-height: 1.7;
+      max-width: 260px
+    }
+
+    .ft-col h5 {
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 20px
+    }
+
+    .ft-col a {
+      display: block;
+      text-decoration: none;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 12px;
+      transition: color .2s
+    }
+
+    .ft-col a:hover {
+      color: var(--g2)
+    }
+
+    .ft-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      padding-top: 28px;
+    }
+
+    .ft-copy {
+      font-size: .76rem;
+      color: rgba(255, 255, 255, .25)
+    }
+
+    .ft-contact {
+      display: flex;
+      gap: 24px
+    }
+
+    .ft-contact a {
+      text-decoration: none;
+      font-size: .76rem;
+      color: rgba(255, 255, 255, .3);
+      transition: color .2s
+    }
+
+    .ft-contact a:hover {
+      color: var(--g2)
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .65s ease, transform .65s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(28px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @media(max-width:960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 100px 6% 70px
+      }
+
+      .hero-p {
+        margin: 0 auto 38px
+      }
+
+      .hero-actions {
+        justify-content: center
+      }
+
+      .hero-trust {
+        justify-content: center
+      }
+
+      .hero-right {
+        order: 2;
+        margin-top: 16px
+      }
+
+      .b1,
+      .b2 {
+        display: none
+      }
+
+      .phone-scene {
+        width: 220px
+      }
+
+      .phone-frame {
+        width: 200px
+      }
+
+      .feat-grid {
+        grid-template-columns: 1fr
+      }
+
+      .feat-item:nth-child(even) {
+        border-right: 1px solid var(--border)
+      }
+
+      .feat-item:nth-child(5) {
+        border-bottom: 1px solid var(--border)
+      }
+
+      .feat-item:nth-child(6) {
+        border-bottom: none
+      }
+
+      .nums-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .steps-row {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .steps-row::before {
+        display: none
+      }
+
+      .about-2col {
+        grid-template-columns: 1fr
+      }
+
+      .legal-2 {
+        grid-template-columns: 1fr
+      }
+
+      .ft-top {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .burger {
+        display: flex
+      }
+
+      .nav-dl {
+        display: none
+      }
+    }
+
+    @media(max-width:600px) {
+      .nums-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .num-block {
+        padding: 32px 20px
+      }
+
+      .steps-row {
+        grid-template-columns: 1fr
+      }
+
+      .ft-top {
+        grid-template-columns: 1fr
+      }
+
+      .ft-bottom {
+        flex-direction: column;
+        text-align: center
+      }
+    }
+
+    .nav-logo {
+      opacity: 0;
+      transform: translateY(-8px) scale(.98);
+      transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .6s
+    }
+
+    .nav.loaded .nav-logo {
+      opacity: 1;
+      transform: none
+    }
+
+    .nav-links a {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .45s ease, transform .45s ease
+    }
+
+    .nav.loaded .nav-links a {
+      opacity: .8;
+      transform: none
+    }
+
+    .btn {
+      transition: transform .15s ease, box-shadow .15s ease
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(.99)
+    }
+
+    .bubble {
+      opacity: 0;
+      transform: translateY(8px) scale(.98);
+      transition: opacity .6s cubic-bezier(.2, .8, .2, 1), transform .6s
+    }
+
+    .bubble.pop-anim {
+      animation: popIn .6s cubic-bezier(.2, .8, .2, 1) forwards
+    }
+
+    .feat-icon-wrap {
+      transition: transform .35s ease
+    }
+
+    .feat-item:hover .feat-icon-wrap {
+      transform: translateY(-6px) rotate(-6deg) scale(1.03)
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(.9) translateY(12px)
+      }
+
+      60% {
+        transform: scale(1.03) translateY(-6px)
+      }
+
+      100% {
+        opacity: 1;
+        transform: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="./images/logo.png" alt="Foodie Roulette" />
+      <span class="nav-logo-text">Foodie <span>Roulette</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="download.html">Download</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="download.html" class="nav-dl">
+        <i class="fas fa-download"></i>
+        Download App
+      </a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="features.html" onclick="closeMenu()">Features</a>
+    <a href="how.html" onclick="closeMenu()">How it Works</a>
+    <a href="compare.html" onclick="closeMenu()">Compare</a>
+    <a href="about.html" onclick="closeMenu()">About</a>
+    <a href="contact.html" onclick="closeMenu()">Contact</a>
+    <a href="download.html" onclick="closeMenu()" style="color:var(--g)">Download Free <i
+        class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-left">
+      <p class="hero-eyebrow">Live on Android &amp; iOS</p>
+      <h1 class="hero-h1">
+        Stop Asking<br />
+        <em>"Where Should</em><br />
+        We Eat?"
+      </h1>
+      <p class="hero-p"><strong>Foodie Roulette</strong> is your all-in-one night-out companion. Use the <strong>Quick
+          Pick</strong> and <strong>Spin the Wheel</strong> to instantly decide on restaurants, bars, or street food.
+        Enjoy multi-stop bar crawls with <strong>Bar Roulette</strong>, stay safe with <strong>Drink Tracker & DD
+          Mode</strong>, and never miss the best spots.</p>
+      <div class="hero-actions">
+        <a href="download.html" class="btn btn-dark">
+          <i class="fas fa-download"></i>
+          Download Free
+        </a>
+        <a href="features.html" class="btn btn-outline">See Features</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-dots">
+          <span><i class="fas fa-utensils"></i></span><span><i class="fas fa-martini-glass"></i></span><span><i
+              class="fas fa-dice"></i></span>
+        </div>
+        <p><strong>All-in-one night-out app</strong> · Discover · Spin · Check-In · Summary</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="phone-scene">
+        <div class="phone-glow"></div>
+        <div class="phone-frame">
+          <img src="./images/home_screen.png" alt="Foodie Roulette">
+        </div>
+        <div class="bubble b1">
+          <div class="icon"><i class="fas fa-dice"></i></div>
+          <div>
+            <div class="b-label">Quick Pick</div>
+            <div class="b-val">8.5 km radius</div>
+          </div>
+        </div>
+        <div class="bubble b2">
+          <div class="icon"><i class="fas fa-glass-cheers"></i></div>
+          <div>
+            <div class="b-label">Bar Roulette</div>
+            <div class="b-val">Active crawl</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="mtrack">
+      <div class="marquee-item"><span class="marquee-dot"></span>Quick Pick</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Spin Now</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Bar Roulette</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Drink Tracker</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>DD Mode</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Night Summary</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Check-In</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Venue Details</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Street Food Vendor</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Roulette Challenges</div>
+      <!-- duplicate for seamless loop -->
+      <div class="marquee-item"><span class="marquee-dot"></span>Quick Pick</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Spin Now</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Bar Roulette</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Drink Tracker</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>DD Mode</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Night Summary</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Check-In</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Venue Details</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Street Food Vendor</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Roulette Challenges</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="reveal center">
+      <p class="s-tag">Core Features</p>
+      <h2 class="s-title">Every night out, simplified.</h2>
+      <p class="s-sub">No more group chat debates or endless scrolling. Foodie Roulette gives you all the tools to
+        discover, decide, and enjoy the night—all in one app.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-item reveal">
+        <span class="feat-num">01</span>
+        <div class="feat-icon-wrap"><i class="fas fa-route" style="color: white;"></i></div>
+        <div class="feat-name">Quick Pick & Spin Now</div>
+        <p class="feat-desc">Set your search radius and food type, tap <strong>"Spin Now"</strong>, and let the wheel
+          decide. Filter by specific cuisines, price ranges, or venue types.</p>
+      </div>
+      <div class="feat-item reveal">
+        <span class="feat-num">02</span>
+        <div class="feat-icon-wrap"><i class="fas fa-glass-cheers" style="color: white;"></i></div>
+        <div class="feat-name">Bar Roulette</div>
+        <p class="feat-desc">Create a bar crawl, invite your friends, and let the app decide the next stop. Built-in
+          <strong>Challenges</strong> keep the night moving and everyone involved.</p>
+      </div>
+      <div class="feat-item reveal">
+        <span class="feat-num">03</span>
+        <div class="feat-icon-wrap"><i class="fas fa-map-marked-alt" style="color: white;"></i></div>
+        <div class="feat-name">Discover & Venue Details</div>
+        <p class="feat-desc">Browse restaurants, bars, and street food vendors on a live map. Tap any venue to see
+          photos, menus, check-ins, and verified community reviews.</p>
+      </div>
+      <div class="feat-item reveal">
+        <span class="feat-num">04</span>
+        <div class="feat-icon-wrap"><i class="fas fa-car" style="color: white;"></i></div>
+        <div class="feat-name">Drink Tracker & DD Mode</div>
+        <p class="feat-desc">Track how many drinks everyone in the group has had. Designate a designated driver (DD) in
+          one tap, and get a clear <strong>Night Summary</strong> so no one drives unsafely.</p>
+      </div>
+      <div class="feat-item reveal">
+        <span class="feat-num">05</span>
+        <div class="feat-icon-wrap"><i class="fas fa-star" style="color: white;"></i></div>
+        <div class="feat-name">Community Reviews</div>
+        <p class="feat-desc">Rate your experience with tags, photos, and quick reviews. Read what others actually said
+          about food, ambiance, and service before you even step inside.</p>
+      </div>
+      <div class="feat-item reveal">
+        <span class="feat-num">06</span>
+        <div class="feat-icon-wrap"><i class="fas fa-heart" style="color: white;"></i></div>
+        <div class="feat-name">Onboarding Questionnaire</div>
+        <p class="feat-desc">A quick quiz learns your cuisine preferences, budget range, and dining mood. Whether you're
+          feeling adventurous or craving something specific, we start recommending what fits you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <div class="nums-section">
+    <div class="nums-grid">
+      <div class="num-block reveal">
+        <div class="num-val" data-count="15" data-suffix="s">0</div>
+        <div class="num-label">Average time to<br />pick a venue</div>
+      </div>
+      <div class="num-block reveal">
+        <div class="num-val" data-count="2400" data-suffix="+">0</div>
+        <div class="num-label">Venues &amp; vendors<br />on the map</div>
+      </div>
+      <div class="num-block reveal">
+        <div class="num-val">6-in-1</div>
+        <div class="num-label">Night-out tools<br />in one app</div>
+      </div>
+      <div class="num-block reveal">
+        <div class="num-val">Real</div>
+        <div class="num-label">Reviews from<br />actual check-ins</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="reveal center">
+      <p class="s-tag">How It Works</p>
+      <h2 class="s-title">From "where?" to checked-in in 4 steps.</h2>
+      <p class="s-sub">Foodie Roulette handles everything—from deciding where to go, to tracking drinks and safely
+        wrapping up your night out.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Tell Us Your Vibe</div>
+        <p class="step-desc">Complete the <strong>Onboarding Questionnaire</strong> so we know your cuisine, budget, and
+          mood. Or, use the live map to search on your own.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Spin & Decide</div>
+        <p class="step-desc">Can't agree? Tap <strong>Quick Pick</strong> or use the <strong>Spin Now</strong> wheel.
+          The app chooses a venue for you based on your filters and current location.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Check-In & Bar Crawl</div>
+        <p class="step-desc">Tap to <strong>Check-In</strong> at your venue. If you're out with friends, activate
+          <strong>Bar Roulette</strong> to decide the next stop and complete built-in challenges.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-title">Track & Wrap Up Safely</div>
+        <p class="step-desc">Use the <strong>Drink Tracker</strong> and <strong>DD Mode</strong> throughout the night.
+          At the end, check your <strong>Night Summary</strong> and leave a review for the community.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-2col">
+      <div>
+        <div class="reveal">
+          <p class="s-tag">About Noeffs LLC</p>
+          <h2 class="s-title">Lean. Forward-thinking. User-first.</h2>
+          <p class="s-sub">Noeffs LLC is a US-based mobile technology company building smart apps that solve everyday
+            problems—with privacy, simplicity, and reliability at the core of everything we ship.</p>
+        </div>
+        <div class="values-list">
+          <div class="value-row reveal">
+            <div class="v-icon"><i class="fas fa-lock" style="color: #ff5a36;"></i></div>
+            <div>
+              <div class="v-title">Privacy-First by Design</div>
+              <p class="v-desc">We collect only what's necessary and share nothing with third parties. Your data is
+                yours.</p>
+            </div>
+          </div>
+          <div class="value-row reveal">
+            <div class="v-icon"><i class="fas fa-cog" style="color: #ff5a36;"></i></div>
+            <div>
+              <div class="v-title">Real-World Engineering</div>
+              <p class="v-desc">Every product is grounded in thoughtful design, strong security principles, and genuine
+                user needs.</p>
+            </div>
+          </div>
+          <div class="value-row reveal">
+            <div class="v-icon"><i class="fas fa-mobile" style="color: #ff5a36;"></i></div>
+            <div>
+              <div class="v-title">Cross-Platform &amp; Continuous</div>
+              <p class="v-desc">Committed to improvement and cross-platform expansion—Android and iOS, today and beyond.
+              </p>
+            </div>
+          </div>
+          <div class="value-row reveal">
+            <div class="v-icon"><i class="fas fa-utensils" style="color: #ff5a36;"></i></div>
+            <div>
+              <div class="v-title">Foodie Roulette is Our Flagship</div>
+              <p class="v-desc">Designed to solve the biggest debate among friends: "Where should we go?" Simple, fast,
+                and responsible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-card-col">
+        <div class="a-card reveal">
+          <div class="a-card-icon"><i class="fas fa-dice" style="color: white;"></i></div>
+          <div class="a-card-title">Foodie Roulette</div>
+          <p class="a-card-desc">A real-time venue discovery app that helps you find restaurants, bars, and street food
+            vendors nearby. With Quick Pick, Spin the Wheel, and Bar Roulette, the group never has to argue over food
+            again.</p>
+          <div><span class="a-badge">● Live on Android &amp; iOS</span></div>
+        </div>
+        <div class="a-card reveal" style="background:linear-gradient(135deg,#1a100b,#2a1810)">
+          <div class="a-card-icon"><i class="fas fa-vault"></i></div>
+          <div class="a-card-title">Encrypted Vault App</div>
+          <p class="a-card-desc">A privacy-focused secure vault for photos, documents, passwords, and notes—built on
+            AES-256 encryption and zero-knowledge architecture to protect what matters most.</p>
+          <div><span class="a-badge dim">● In Development</span></div>
+        </div>
+        <div class="a-card2 reveal">
+          <div class="a-card2-title">Mission &amp; Vision</div>
+          <p class="a-card2-desc">To design technology that quietly solves big problems—putting convenience, connection,
+            and trust at the center of every night out. Brunswick, MD · Founded 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL -->
+  <section id="legal">
+    <div class="reveal center">
+      <p class="s-tag">Transparency</p>
+      <h2 class="s-title">Your trust is everything.</h2>
+      <p class="s-sub">We operate with full transparency. Our legal documents are plain-language and publicly available.
+      </p>
+    </div>
+    <div class="legal-2">
+      <div class="leg-card reveal">
+        <div class="leg-top">
+          <div class="leg-ico"><i class="fas fa-lock" style="color: white;"></i></div>
+          <div class="leg-head">Privacy Policy</div>
+        </div>
+        <p class="leg-sub">We do not sell your personal information—ever. We collect only what's needed to run our
+          services, and protect it with industry-standard encryption in transit and at rest.</p>
+        <ul class="leg-points">
+          <li>Right to access, correct, or delete your data anytime</li>
+          <li>No personal content used for advertising</li>
+          <li>Encryption in transit and at rest</li>
+          <li>Respond to all requests within 30 days</li>
+        </ul>
+        <a href="privacy.html" class="leg-btn">Read Full Privacy Policy <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="leg-card reveal">
+        <div class="leg-top">
+          <div class="leg-ico"><i class="fas fa-clipboard" style="color: white;"></i></div>
+          <div class="leg-head">Terms of Service</div>
+        </div>
+        <p class="leg-sub">Effective May 8, 2026. You retain full ownership of all content you create. Subscriptions can
+          be cancelled at any time. All disputes governed by US law.</p>
+        <ul class="leg-points">
+          <li>You own your content—we never claim it</li>
+          <li>Cancel subscription anytime, no penalty</li>
+          <li>No automated tools or data scraping allowed</li>
+          <li>Governed under US law, American Arbitration Association</li>
+        </ul>
+        <a href="terms.html" class="leg-btn">Read Full Terms of Service <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-ring cta-ring1"></div>
+    <div class="cta-ring cta-ring2"></div>
+    <div class="cta-ring cta-ring3"></div>
+    <p class="cta-tag reveal">Free Download — No Credit Card</p>
+    <h2 class="cta-h reveal">Stop Scrolling.<br /><em>Start Going.</em></h2>
+    <p class="cta-p reveal">Download Foodie Roulette free. Discover venues, spin the wheel, and keep the night
+      responsible—all in one app. Available now on Android and iOS.</p>
+    <div class="store-row reveal">
+      <a href="download.html" class="store-btn">
+        <span class="store-ico"><i class="fab fa-apple"></i></span>
+        <div class="store-label"><small>Download on the</small><strong>App Store</strong></div>
+      </a>
+      <a href="download.html" class="store-btn">
+        <span class="store-ico"><i class="fab fa-android"></i></span>
+        <div class="store-label"><small>Get it on</small><strong>Google Play</strong></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-logo">
+          <img src="./images/logo.png" alt="Foodie Roulette" />
+          <span>Foodie <em>Roulette</em></span>
+        </div>
+        <p class="ft-tagline">Discover where to go, decide in seconds, and have a great (and responsible) night out. A
+          product by Noeffs LLC.</p>
+      </div>
+      <div class="ft-col">
+        <h5>Product</h5>
+        <a href="features.html">Features</a>
+        <a href="download.html">Download</a>
+      </div>
+      <div class="ft-col">
+        <h5>Company</h5>
+        <a href="about.html">About Noeffs LLC</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+      <div class="ft-col">
+        <h5>Contact</h5>
+        <a href="mailto:support@noeffs.com">support@noeffs.com</a>
+        <a href="mailto:contact@noeffs.com">contact@noeffs.com</a>
+        <a href="tel:8776633378">877-663-3378</a>
+        <a href="#">Brunswick, MD, USA</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p class="ft-copy">© 2026 Noeffs LLC · All rights reserved · Brunswick, MD</p>
+      <div class="ft-contact">
+        <a href="mailto:privacy@noeffs.com">privacy@noeffs.com</a>
+        <a href="download.html">App Store</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NAV
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 30));
+
+    // BURGER
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    function closeMenu() {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+    }
+
+    // REVEAL
+    const revealEls = document.querySelectorAll('.reveal');
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 70);
+          revObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revObs.observe(el));
+
+    // COUNTER
+    function countUp(el, target, prefix = '', suffix = '') {
+      let start = 0;
+      const dur = 1800;
+      const step = 16;
+      const inc = target / (dur / step);
+      const timer = setInterval(() => {
+        start += inc;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = prefix + Math.round(start) + suffix;
+      }, step);
+    }
+
+    const numEls = document.querySelectorAll('[data-count]');
+    const numObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const count = parseInt(el.dataset.count);
+          const prefix = el.dataset.prefix || '';
+          const suffix = el.dataset.suffix || '';
+          countUp(el, count, prefix, suffix);
+          numObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    numEls.forEach(el => numObs.observe(el));
+
+    // MARQUEE pause on hover
+    const track = document.getElementById('mtrack');
+    track.parentElement.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+    track.parentElement.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+
+    // DOM ready micro-interactions
+    window.addEventListener('DOMContentLoaded', () => {
+      const navEl = document.getElementById('nav');
+      if (navEl) {
+        const links = navEl.querySelectorAll('.nav-links a');
+        links.forEach((a, i) => a.style.transitionDelay = `${120 + i * 60}ms`);
+        setTimeout(() => navEl.classList.add('loaded'), 120);
+      }
+      const bubbles = document.querySelectorAll('.bubble');
+      bubbles.forEach((b, i) => setTimeout(() => b.classList.add('pop-anim'), 420 + i * 180));
+      const phone = document.querySelector('.hero-right');
+      if (phone) phone.style.opacity = '';
+    });
+  </script>
+</body>
+
+</html>
